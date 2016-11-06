@@ -16,10 +16,10 @@ import {NodeEditableEvent, NodeEditableEventAction} from './editable.type';
 })
 export class NodeEditableDirective implements OnInit {
   @Input('nodeEditable')
-  private nodeValue: string;
+  public nodeValue: string;
 
   @Output()
-  private valueChanged: EventEmitter<NodeEditableEvent> = new EventEmitter<NodeEditableEvent>(false);
+  public valueChanged: EventEmitter<NodeEditableEvent> = new EventEmitter<NodeEditableEvent>(false);
 
   constructor(
     @Inject(Renderer) private renderer: Renderer,
@@ -33,17 +33,17 @@ export class NodeEditableDirective implements OnInit {
   }
 
   @HostListener('keyup.enter', ['$event.target.value'])
-  private applyNewValue(newNodeValue: string) {
+  public applyNewValue(newNodeValue: string) {
     this.valueChanged.emit({type: 'keyup', value: newNodeValue});
   }
 
   @HostListener('blur', ['$event.target.value'])
-  private applyNewValueByLoosingFocus(newNodeValue: string): void {
+  public applyNewValueByLoosingFocus(newNodeValue: string): void {
     this.valueChanged.emit({type: 'blur', value: newNodeValue});
   }
 
   @HostListener('keyup.esc')
-  private cancelEditing(): void {
+  public cancelEditing(): void {
     this.valueChanged.emit({
       type: 'keyup',
       value: this.nodeValue,

@@ -8,13 +8,13 @@ import {NodeDraggableEvent} from './draggable.types';
   selector: '[nodeDraggable]'
 })
 export class NodeDraggableDirective implements OnDestroy {
-  private static DATA_TRANSFER_STUB_DATA: string = 'some browsers enable drag-n-drop only when dataTransfer has data';
+  public static DATA_TRANSFER_STUB_DATA: string = 'some browsers enable drag-n-drop only when dataTransfer has data';
 
   @Input()
-  private nodeDraggable: ElementRef;
+  public nodeDraggable: ElementRef;
 
   @Input()
-  private tree: TreeModel;
+  public tree: TreeModel;
 
   private nodeNativeElement: HTMLElement;
   private disposersForDragListeners: Function[] = [];

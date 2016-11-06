@@ -19,7 +19,6 @@
     "no-eval": true,
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
-//    "no-unused-variable": true,
     "no-unreachable": true,
     "no-use-before-declare": true,
     "one-line": [true,
@@ -35,7 +34,6 @@
     "variable-name": false,
 
     "directive-selector-name": [true, "camelCase"],
-//    "component-selector-name": [true, "kebab-case"],
     "directive-selector-type": [true, "attribute"],
     "component-selector-type": [true, "element"],
     "use-input-property-decorator": true,

@@ -1,20 +1,29 @@
 import {Component, EventEmitter, Output, Renderer, Inject, OnDestroy, OnInit} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
 import {NodeMenuService} from './node-menu.service';
 import {NodeMenuItemSelectedEvent, NodeMenuItemAction, NodeMenuEvent, NodeMenuAction} from './menu.types';
 import {isLeftButtonClicked, isEscapePressed} from '../common/utils/event.utils';
+import { styles } from './node-menu.styles';
 
 @Component({
   selector: 'node-menu',
-  styleUrls: ['./node-menu.component.css'],
-  templateUrl: './node-menu.component.html',
-  directives: [CORE_DIRECTIVES]
+  styles: styles,
+  template: `
+    <div class="node-menu">
+      <ul class="node-menu-content">
+        <li class="node-menu-item" *ngFor="let menuItem of availableMenuItems"
+            (click)="onMenuItemSelected($event, menuItem)">
+          <div class="node-menu-item-icon {{menuItem.cssClass}}"></div>
+          <span class="node-menu-item-value">{{menuItem.name}}</span>
+        </li>
+      </ul>
+    </div>
+  `
 })
 export class NodeMenuComponent implements OnInit, OnDestroy {
   @Output()
-  private menuItemSelected: EventEmitter<NodeMenuItemSelectedEvent> = new EventEmitter<NodeMenuItemSelectedEvent>();
+  public menuItemSelected: EventEmitter<NodeMenuItemSelectedEvent> = new EventEmitter<NodeMenuItemSelectedEvent>();
 
-  private availableMenuItems: NodeMenuItem[] = [
+  public availableMenuItems: NodeMenuItem[] = [
     {
       name: 'New tag',
       action: NodeMenuItemAction.NewTag,
@@ -74,7 +83,7 @@ export class NodeMenuComponent implements OnInit, OnDestroy {
   }
 }
 
-interface NodeMenuItem {
+export interface NodeMenuItem {
   name: string;
   action: NodeMenuItemAction;
   cssClass: string;
